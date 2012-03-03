@@ -3,6 +3,7 @@ package roujo.runescape.data;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -11,7 +12,8 @@ public class Item {
 	private URL iconURL, largeIconURL;//, typeIconURL;
 	private Image icon, largeIcon;//, typeIcon;
 	private boolean members;
-	private long id, marketPrice;
+	private long id;
+	private Map<String, Long> prices;
 	
 	// TODO: Add trend management
 
@@ -85,23 +87,15 @@ public class Item {
 		this.id = id;
 	}
 
-	public long getMarketPrice() {
-		return marketPrice;
+	public long getPrice(String priceType) {
+		return prices.get(priceType);
 	}
 
-	protected void setMarketPrice(long marketPrice) {
-		this.marketPrice = marketPrice;
-	}
-	
-	public long getPrice() {
-		return getMarketPrice();
-	}
-	
-	public void setPrice(long price) {
-		setMarketPrice(price);
+	protected void setPrice(String priceType, long price) {
+		prices.put(priceType, price);
 	}
 
 	public String toString() {
-		return getName() + " (" + getType() + "): " + getMarketPrice();
+		return getName() + " (" + getType() + "): " + getPrice("Market");
 	}
 }

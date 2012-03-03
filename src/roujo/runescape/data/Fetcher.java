@@ -44,7 +44,7 @@ public class Fetcher {
 				item.setDescription((String) itemData.get("description"));
 				String itemPrice = ((String) ((JSONObject) itemData
 						.get("current")).get("price")).replace(",", "");
-				item.setMarketPrice(Long.parseLong(itemPrice));
+				item.setPrice("Market", Long.parseLong(itemPrice));
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
 			} catch (IOException e) {
