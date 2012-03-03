@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -13,13 +13,25 @@ import org.json.simple.JSONValue;
 import roujo.runescape.Debug;
 
 public class Fetcher {
-	private static final Map<Long, Item> Items = new HashMap<Long, Item>();
-	private static final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+	private static final Fetcher instance = new Fetcher();
+	
+	public static Fetcher getInstance() {
+		return instance;
+	}
+	
+	private Fetcher() {
+		items = new TreeMap<Long, Item>();
+		craftables = new TreeMap<Long, Craftable>();
+	}
+	
+	private final Map<Long, Item> items;
+	private final Map<Long, Craftable> craftables;
+	private final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
 
-	public static Item getItem(ItemName itemName) {
+	public Item getItem(ItemName itemName) {
 		Item item;
-		if (Items.containsKey(itemName.getId())) {
-			item = Items.get(itemName.getId());
+		if (items.containsKey(itemName.getId())) {
+			item = items.get(itemName.getId());
 		} else {
 			if (itemName.isCraftable()) {
 				item = new Craftable();
@@ -64,7 +76,10 @@ public class Fetcher {
 				item.setPrice("Market", marketPrice);
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
-				Items.put(itemName.getId(), item);
+				items.put(itemName.getId(), item);
+				if(item instanceof Craftable) {
+					craftables.put(item.getId(), (Craftable) item);
+				}
 				if (Debug.isEnabled)
 					System.out.println("Finished fetching item: "
 							+ item.getName());
@@ -74,5 +89,13 @@ public class Fetcher {
 		}
 
 		return item;
+	}
+	
+	public Map<Long, Item> getItems() {
+		return items;
+	}
+	
+	public Map<Long, Craftable> getCraftables() {
+		return craftables;
 	}
 }
