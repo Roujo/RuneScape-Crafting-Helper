@@ -2,13 +2,16 @@ package roujo.runescape.data;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-public class Item {
+public class Item implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String type, name, description;
 	private URL iconURL, largeIconURL;//, typeIconURL;
 	private Image icon, largeIcon;//, typeIcon;
