@@ -10,9 +10,9 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import roujo.runescape.Debug;
+
 public class Fetcher {
-	// TODO: Switch debug off
-	private static boolean debug = true;
 	private static final Map<Long, Item> Items = new HashMap<Long, Item>();
 	private static final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
 
@@ -65,7 +65,7 @@ public class Fetcher {
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
 				Items.put(itemName.getId(), item);
-				if (debug)
+				if (Debug.isEnabled)
 					System.out.println("Finished fetching item: "
 							+ item.getName());
 			} catch (IOException e) {
