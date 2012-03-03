@@ -90,12 +90,13 @@ public class Fetcher {
 
 				JSONObject graphData = (JSONObject) ((JSONObject) JSONValue
 						.parse(graphJSONString)).get("daily");
-				Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-				Calendar cal2 = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
-				Long today = cal2.getTimeInMillis() + TimeZone.getDefault().getOffset(new Date().getTime());
+				Calendar cal = Calendar
+						.getInstance(TimeZone.getTimeZone("UTC"));
+				Calendar cal2 = new GregorianCalendar(cal.get(Calendar.YEAR),
+						cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+				Long today = cal2.getTimeInMillis()
+						+ TimeZone.getDefault().getOffset(new Date().getTime());
 				item.setPrice("Market", (Long) graphData.get(today.toString()));
-				
-				
 
 				// Add item to craftables if it is a craftable.
 				if (item instanceof Craftable) {
