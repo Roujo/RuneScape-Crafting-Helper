@@ -14,7 +14,7 @@ public class Fetcher {
 	private static final Map<Long, Item> Items = new HashMap<Long, Item>();
 	private static final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
 
-	public static Item getItem(int id) {
+	public static Item getItem(long id) {
 		Item item = Items.get(id);
 		if (item == null) {
 			try {
