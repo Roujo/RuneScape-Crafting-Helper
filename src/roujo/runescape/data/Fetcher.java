@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 public class Fetcher {
+	// TODO: Switch debug off
+	private static boolean debug = true;
 	private static final Map<Long, Item> Items = new HashMap<Long, Item>();
 	private static final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
 
@@ -19,7 +21,7 @@ public class Fetcher {
 		if (Items.containsKey(itemName.id)) {
 			item = Items.get(itemName.id);
 		} else {
-			if(itemName.isCraftable) {
+			if (itemName.isCraftable) {
 				item = new Craftable();
 			} else {
 				item = new Item();
@@ -54,6 +56,9 @@ public class Fetcher {
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
 				Items.put(itemName.id, item);
+				if (debug)
+					System.out.println("Finished fetching item: "
+							+ item.getName());
 			} catch (IOException e) {
 				item = null;
 			}
