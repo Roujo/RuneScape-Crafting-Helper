@@ -6,6 +6,9 @@ public enum ItemName {
 	// Herblore materials
 	Coconut(5976L),
 	
+	// Runes
+	Nature_rune(561L),
+	
 	// Ores
 	Copper_ore(436L),
 	Tin_ore(438L),
