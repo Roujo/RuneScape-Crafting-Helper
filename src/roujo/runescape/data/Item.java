@@ -1,4 +1,4 @@
-package roujo.runescape;
+package roujo.runescape.data;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -13,11 +13,14 @@ public class Item {
 	private boolean members;
 	private int id, price;
 
+	protected Item() {
+	}
+	
 	public String getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	protected void setType(String type) {
 		this.type = type;
 	}
 
@@ -25,7 +28,7 @@ public class Item {
 		return name;
 	}
 
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
 	}
 
@@ -33,7 +36,7 @@ public class Item {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	protected void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -41,7 +44,7 @@ public class Item {
 		return icon;
 	}
 
-	public void setIcon(String iconURL) throws IOException {
+	protected void setIcon(String iconURL) throws IOException {
 		this.iconURL = new URL(iconURL);
 		icon = ImageIO.read(this.iconURL);
 	}
@@ -50,7 +53,7 @@ public class Item {
 		return icon_large;
 	}
 
-	public void setIcon_large(String icon_largeURL) throws IOException {
+	protected void setIcon_large(String icon_largeURL) throws IOException {
 		this.icon_largeURL = new URL(icon_largeURL);
 		icon_large = ImageIO.read(this.icon_largeURL);
 	}
@@ -59,7 +62,7 @@ public class Item {
 		return typeIcon;
 	}
 
-	public void setTypeIcon(String typeIconURL) throws IOException {
+	protected void setTypeIcon(String typeIconURL) throws IOException {
 		this.typeIconURL = new URL(typeIconURL);
 		typeIcon = ImageIO.read(this.typeIconURL);
 	}
@@ -68,7 +71,7 @@ public class Item {
 		return members;
 	}
 
-	public void setMembers(boolean members) {
+	protected void setMembers(boolean members) {
 		this.members = members;
 	}
 
@@ -76,7 +79,7 @@ public class Item {
 		return id;
 	}
 
-	public void setId(int id) {
+	protected void setId(int id) {
 		this.id = id;
 	}
 
@@ -84,7 +87,7 @@ public class Item {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	protected void setPrice(int price) {
 		this.price = price;
 	}
 
