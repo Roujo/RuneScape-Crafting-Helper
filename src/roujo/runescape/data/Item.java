@@ -11,7 +11,7 @@ public class Item {
 	private URL iconURL, icon_largeURL, typeIconURL;
 	private Image icon, icon_large, typeIcon;
 	private boolean members;
-	private int id, price;
+	private long id, price;
 	
 	// TODO: Add trend management
 
@@ -77,19 +77,19 @@ public class Item {
 		this.members = members;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	protected void setId(int id) {
+	protected void setId(long id) {
 		this.id = id;
 	}
 
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	protected void setPrice(int price) {
+	protected void setPrice(long price) {
 		this.price = price;
 	}
 

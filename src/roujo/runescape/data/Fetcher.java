@@ -33,12 +33,12 @@ public class Fetcher {
 			item = new Item();
 			item.setIcon((String) itemData.get("icon"));
 			item.setIcon_large((String) itemData.get("icon_large"));
-			item.setId((Integer) itemData.get("id"));
+			item.setId((Long) itemData.get("id"));
 			item.setType((String) itemData.get("type"));
 			item.setTypeIcon((String) itemData.get("typeIcon"));
 			item.setName((String) itemData.get("name"));
 			item.setDescription((String) itemData.get("description"));
-			item.setPrice((Integer) ((JSONObject) itemData.get("current"))
+			item.setPrice((Long) ((JSONObject) itemData.get("current"))
 					.get("price"));
 			item.setMembers((Boolean) itemData.get("members"));
 		} catch (IOException e) {
