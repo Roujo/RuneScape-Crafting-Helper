@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<!-- ====================================================================== 
+     Mar 03, 2012 15:44:05                                                        
+
+     RuneScape Crafting Helper
+       A program that fetches the latest Grand Exchanges rates on various
+       RuneScape items and calculates potential profit from crafting them.
+                   
+     Jonathan                                                                
+     ====================================================================== -->
+<project name="RuneScape Crafting Helper" default="default">
+	<description>
+		A program that fetches the latest Grand Exchanges rates on various
+		RuneScape items and calculates potential profit from crafting them.
+    </description>
+
+	<property name="src" location="src" />
+	<property name="lib" location="lib" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="Cleans the build directories">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+		<!-- Set the timestamp -->
+		<tstamp />
+		<!-- Create build directory -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+	<target name="compile" depends="init" description="Compiles the classes in the project">
+		<mkdir dir="${build}" />
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}">
+			<classpath>
+				<pathelement location="lib/RoujoLib.jar" />
+				<pathelement location="lib/json-simple-1.1.1.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- ================================= 
+          target: jar              
+         ================================= -->
+	<target name="jar" depends="compile" description="Builds a jar archive of the project">
+		<jar destfile="${dist}/RuneScape-Crafting-Helper.jar" basedir="${build}">
+			<zipgroupfileset dir="${lib}" includes="*.jar" />
+			<manifest>
+				<attribute name="Main-Class" value="roujo.runescape.Main" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="jar" description="Default compilation" />
+
+</project>
