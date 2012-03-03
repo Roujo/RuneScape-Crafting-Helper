@@ -23,6 +23,9 @@ public class Fetcher {
 		} else {
 			if (itemName.isCraftable()) {
 				item = new Craftable();
+				for(Component c : itemName.getComponents()) {
+					((Craftable) item).addMaterial(c.getItemName(), c.getQuantity());
+				}
 			} else {
 				item = new Item();
 			}

@@ -5,24 +5,24 @@ public enum ItemName {
 	// Herblore materials
 	Coconut(5976L),
 	
-	// Bars
-	Steel_bar(2353L, true),
-	
 	// Ores
 	Coal(453L),
-	Iron_ore(440L)
+	Iron_ore(440L),
+	
+	// Bars
+	Steel_bar(2353L, new Component[]{new Component(Coal, 2), new Component(Iron_ore, 1)}),
 	;
 	
 	private final long id;
-	private final boolean isCraftable;
+	private final Component[] components;
 	
 	private ItemName(Long id) {
-		this(id, false);
+		this(id, null);
 	}
 	
-	private ItemName(Long id, boolean isCraftable) {
+	private ItemName(Long id, Component[] components) {
 		this.id = id;
-		this.isCraftable = isCraftable;
+		this.components = components;
 	}
 	
 	public long getId() {
@@ -30,6 +30,10 @@ public enum ItemName {
 	}
 	
 	public boolean isCraftable() {
-		return isCraftable;
+		return components != null;
+	}
+	
+	public Component[] getComponents() {
+		return components;
 	}
 }
