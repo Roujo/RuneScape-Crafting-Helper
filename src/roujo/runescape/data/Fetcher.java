@@ -32,7 +32,7 @@ public class Fetcher {
 					.parse(JSONString)).get("item");
 			item = new Item();
 			item.setIcon((String) itemData.get("icon"));
-			item.setIcon_large((String) itemData.get("icon_large"));
+			item.setLargeIcon((String) itemData.get("icon_large"));
 			item.setId((Long) itemData.get("id"));
 			item.setType((String) itemData.get("type"));
 			//item.setTypeIcon((String) itemData.get("typeIcon"));
@@ -40,7 +40,7 @@ public class Fetcher {
 			item.setDescription((String) itemData.get("description"));
 			String itemPrice = ((String) ((JSONObject) itemData.get("current"))
 					.get("price")).replace(",", "");
-			item.setPrice(Long.parseLong(itemPrice));
+			item.setMarketPrice(Long.parseLong(itemPrice));
 			item.setMembers(((String) itemData.get("members")).equals("true"));
 		} catch (IOException e) {
 			item = null;

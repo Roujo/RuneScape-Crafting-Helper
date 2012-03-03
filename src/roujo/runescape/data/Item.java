@@ -8,10 +8,10 @@ import javax.imageio.ImageIO;
 
 public class Item {
 	private String type, name, description;
-	private URL iconURL, icon_largeURL;//, typeIconURL;
-	private Image icon, icon_large;//, typeIcon;
+	private URL iconURL, largeIconURL;//, typeIconURL;
+	private Image icon, largeIcon;//, typeIcon;
 	private boolean members;
-	private long id, price;
+	private long id, marketPrice;
 	
 	// TODO: Add trend management
 
@@ -51,13 +51,13 @@ public class Item {
 		icon = ImageIO.read(this.iconURL);
 	}
 
-	public Image getIcon_large() {
-		return icon_large;
+	public Image getLargeIcon() {
+		return largeIcon;
 	}
 
-	protected void setIcon_large(String icon_largeURL) throws IOException {
-		this.icon_largeURL = new URL(icon_largeURL);
-		icon_large = ImageIO.read(this.icon_largeURL);
+	protected void setLargeIcon(String largeIconURL) throws IOException {
+		this.largeIconURL = new URL(largeIconURL);
+		largeIcon = ImageIO.read(this.largeIconURL);
 	}
 
 	/*public Image getTypeIcon() {
@@ -85,15 +85,15 @@ public class Item {
 		this.id = id;
 	}
 
-	public long getPrice() {
-		return price;
+	public long getMarketPrice() {
+		return marketPrice;
 	}
 
-	protected void setPrice(long price) {
-		this.price = price;
+	protected void setMarketPrice(long price) {
+		this.marketPrice = price;
 	}
 
 	public String toString() {
-		return getName() + " (" + getType() + "): " + getPrice();
+		return getName() + " (" + getType() + "): " + getMarketPrice();
 	}
 }
