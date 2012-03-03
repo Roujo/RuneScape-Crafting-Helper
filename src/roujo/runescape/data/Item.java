@@ -12,6 +12,8 @@ public class Item {
 	private Image icon, icon_large, typeIcon;
 	private boolean members;
 	private int id, price;
+	
+	// TODO: Add trend management
 
 	protected Item() {
 	}
@@ -91,5 +93,7 @@ public class Item {
 		this.price = price;
 	}
 
-	// TODO: Add trend management
+	public String toString() {
+		return getName() + " (" + getType() + "): " + getPrice();
+	}
 }
