@@ -97,6 +97,16 @@ public class Item {
 		prices.put(priceType, price);
 	}
 
+	public long getProfit(String priceType) {
+		long profit;
+		if(prices.containsKey(priceType)) {
+			profit = prices.get("Market") - prices.get(priceType);
+		} else {
+			profit = 0;
+		}
+		return profit;
+	}
+	
 	public String toString() {
 		return getName() + " (" + getType() + "): " + getPrice("Market");
 	}

@@ -14,14 +14,14 @@ public class Craftable extends Item {
 	protected void addMaterial(ItemName itemName, long quantity) {
 		Item item = Fetcher.getItem(itemName);
 		materials.put(item, quantity);
-		item.setPrice("Crafting",
+		this.setPrice("Crafting",
 				this.getPrice("Crafting") + item.getPrice("Market") * quantity);
 	}
 
 	protected void removeMaterial(ItemName itemName) {
 		Item item = Fetcher.getItem(itemName);
 		long quantity = materials.remove(item);
-		item.setPrice("Crafting",
+		this.setPrice("Crafting",
 				this.getPrice("Crafting") - item.getPrice("Market") * quantity);
 	}
 }
