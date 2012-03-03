@@ -38,9 +38,10 @@ public class Fetcher {
 			//item.setTypeIcon((String) itemData.get("typeIcon"));
 			item.setName((String) itemData.get("name"));
 			item.setDescription((String) itemData.get("description"));
-			item.setPrice((Long) ((JSONObject) itemData.get("current"))
-					.get("price"));
-			item.setMembers((Boolean) itemData.get("members"));
+			String itemPrice = ((String) ((JSONObject) itemData.get("current"))
+					.get("price")).replace(",", "");
+			item.setPrice(Long.parseLong(itemPrice));
+			item.setMembers(((String) itemData.get("members")).equals("true"));
 		} catch (IOException e) {
 			item = null;
 		}
