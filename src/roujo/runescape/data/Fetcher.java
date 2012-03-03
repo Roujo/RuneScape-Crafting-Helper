@@ -18,16 +18,16 @@ public class Fetcher {
 
 	public static Item getItem(ItemName itemName) {
 		Item item;
-		if (Items.containsKey(itemName.id)) {
-			item = Items.get(itemName.id);
+		if (Items.containsKey(itemName.getId())) {
+			item = Items.get(itemName.getId());
 		} else {
-			if (itemName.isCraftable) {
+			if (itemName.isCraftable()) {
 				item = new Craftable();
 			} else {
 				item = new Item();
 			}
 			try {
-				URL itemURL = new URL(ItemURLBase + itemName.id);
+				URL itemURL = new URL(ItemURLBase + itemName.getId());
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						itemURL.openStream()));
 				StringBuilder response = new StringBuilder();
@@ -50,12 +50,18 @@ public class Fetcher {
 				// item.setTypeIcon((String) itemData.get("typeIcon"));
 				item.setName((String) itemData.get("name"));
 				item.setDescription((String) itemData.get("description"));
-				String itemPrice = ((String) ((JSONObject) itemData
-						.get("current")).get("price")).replace(",", "");
-				item.setPrice("Market", Long.parseLong(itemPrice));
+				Object marketPriceObj = ((JSONObject) itemData.get("current"))
+						.get("price");
+				Long marketPrice;
+				if(marketPriceObj instanceof Long) {
+					marketPrice = (Long) marketPriceObj;
+				} else {
+					marketPrice = Long.parseLong(((String) marketPriceObj).replace(",", "")); 
+				}
+				item.setPrice("Market", marketPrice);
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
-				Items.put(itemName.id, item);
+				Items.put(itemName.getId(), item);
 				if (debug)
 					System.out.println("Finished fetching item: "
 							+ item.getName());
