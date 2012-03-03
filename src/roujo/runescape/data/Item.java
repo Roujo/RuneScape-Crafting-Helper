@@ -89,8 +89,16 @@ public class Item {
 		return marketPrice;
 	}
 
-	protected void setMarketPrice(long price) {
-		this.marketPrice = price;
+	protected void setMarketPrice(long marketPrice) {
+		this.marketPrice = marketPrice;
+	}
+	
+	public long getPrice() {
+		return getMarketPrice();
+	}
+	
+	public void setPrice(long price) {
+		setMarketPrice(price);
 	}
 
 	public String toString() {
