@@ -14,11 +14,18 @@ public class Fetcher {
 	private static final Map<Long, Item> Items = new HashMap<Long, Item>();
 	private static final String ItemURLBase = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
 
-	public static Item getItem(long id) {
-		Item item = Items.get(id);
-		if (item == null) {
+	public static Item getItem(ItemName itemName) {
+		Item item;
+		if (Items.containsKey(itemName.id)) {
+			item = Items.get(itemName.id);
+		} else {
+			if(itemName.isCraftable) {
+				item = new Craftable();
+			} else {
+				item = new Item();
+			}
 			try {
-				URL itemURL = new URL(ItemURLBase + id);
+				URL itemURL = new URL(ItemURLBase + itemName.id);
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						itemURL.openStream()));
 				StringBuilder response = new StringBuilder();
@@ -34,7 +41,6 @@ public class Fetcher {
 				// Yay.
 				JSONObject itemData = (JSONObject) ((JSONObject) JSONValue
 						.parse(JSONString)).get("item");
-				item = new Item();
 				item.setIcon((String) itemData.get("icon"));
 				item.setLargeIcon((String) itemData.get("icon_large"));
 				item.setId((Long) itemData.get("id"));
@@ -47,6 +53,7 @@ public class Fetcher {
 				item.setPrice("Market", Long.parseLong(itemPrice));
 				item.setMembers(((String) itemData.get("members"))
 						.equals("true"));
+				Items.put(itemName.id, item);
 			} catch (IOException e) {
 				item = null;
 			}

@@ -3,6 +3,7 @@ package roujo.runescape.data;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -18,6 +19,7 @@ public class Item {
 	// TODO: Add trend management
 
 	protected Item() {
+		prices = new HashMap<String, Long>();
 	}
 	
 	public String getType() {
