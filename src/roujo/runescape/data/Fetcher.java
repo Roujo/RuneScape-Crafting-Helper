@@ -35,7 +35,7 @@ public class Fetcher {
 			item.setIcon_large((String) itemData.get("icon_large"));
 			item.setId((Long) itemData.get("id"));
 			item.setType((String) itemData.get("type"));
-			item.setTypeIcon((String) itemData.get("typeIcon"));
+			//item.setTypeIcon((String) itemData.get("typeIcon"));
 			item.setName((String) itemData.get("name"));
 			item.setDescription((String) itemData.get("description"));
 			item.setPrice((Long) ((JSONObject) itemData.get("current"))

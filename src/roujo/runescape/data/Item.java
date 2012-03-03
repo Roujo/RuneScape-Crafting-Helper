@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Item {
 	private String type, name, description;
-	private URL iconURL, icon_largeURL, typeIconURL;
-	private Image icon, icon_large, typeIcon;
+	private URL iconURL, icon_largeURL;//, typeIconURL;
+	private Image icon, icon_large;//, typeIcon;
 	private boolean members;
 	private long id, price;
 	
@@ -60,14 +60,14 @@ public class Item {
 		icon_large = ImageIO.read(this.icon_largeURL);
 	}
 
-	public Image getTypeIcon() {
+	/*public Image getTypeIcon() {
 		return typeIcon;
 	}
 
 	protected void setTypeIcon(String typeIconURL) throws IOException {
 		this.typeIconURL = new URL(typeIconURL);
 		typeIcon = ImageIO.read(this.typeIconURL);
-	}
+	}*/
 
 	public boolean isMembers() {
 		return members;
